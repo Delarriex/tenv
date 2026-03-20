@@ -2428,7 +2428,7 @@
             function getMobileBottomOffset() {
                 var cssValue = getComputedStyle(document.documentElement).getPropertyValue('--chat-float-bottom');
                 var trimmed = (cssValue || '').trim();
-                return trimmed !== '' ? trimmed : '100px';
+                return trimmed !== '' ? trimmed : '15px';
             }
 
             function repositionWidget() {
@@ -2505,7 +2505,7 @@
 
         .whatsapp-float {
             position: fixed;
-            bottom: var(--chat-float-bottom, 20px);
+            bottom: var(--chat-float-bottom, 15px);
             left: 20px;
             background: #25d366;
             color: #ffffff;
@@ -2553,7 +2553,7 @@
         /* Mobile Navigation Spacing - prevent overlap with bottom nav */
         @media (max-width: 768px) {
             :root {
-                --chat-float-bottom: 100px;
+                --chat-float-bottom: 15px;
             }
 
             .whatsapp-float {
@@ -2588,13 +2588,13 @@
             iframe[id*="smartsupp"],
             div[style*="z-index: 10000000"],
             div[style*="z-index:10000000"] {
-                bottom: 100px !important;
+                bottom: 15px !important;
             }
         }
 
         @media (max-width: 640px) {
             :root {
-                --chat-float-bottom: 120px;
+                --chat-float-bottom: 15px;
             }
         }
 
@@ -2624,7 +2624,7 @@
         .notification-popup {
             position: fixed;
             z-index: 1000;
-            bottom: var(--chat-float-bottom, 20px);
+            bottom: var(--chat-float-bottom, 15px);
             right: 20px;
             background: linear-gradient(135deg, rgba(12, 12, 12, 0.98) 0%, rgba(22, 22, 22, 0.98) 100%);
             border-radius: 12px;
