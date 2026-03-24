@@ -1,12 +1,12 @@
 {
     "success": true,
     "source": "stooq-csv-live",
-    "updated": "2026-03-24T16:04:00+01:00",
+    "updated": "2026-03-24T16:38:01+01:00",
     "quotes": [
         {
             "symbol": "aapl.us",
             "price": 249.55,
-            "changePercent": -1.41
+            "changePercent": -1.82
         },
         {
             "symbol": "amd.us",
@@ -26,7 +26,7 @@
         {
             "symbol": "csco.us",
             "price": 78.19,
-            "changePercent": -2.07
+            "changePercent": -2.45
         },
         {
             "symbol": "ebay.us",
@@ -46,12 +46,12 @@
         {
             "symbol": "nvda.us",
             "price": 173.98,
-            "changePercent": -1.09
+            "changePercent": -1.2
         },
         {
             "symbol": "tsla.us",
             "price": 376.312,
-            "changePercent": -2.6
+            "changePercent": -2.88
         }
     ]
 }

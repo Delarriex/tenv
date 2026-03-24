@@ -132,7 +132,7 @@ if (isset($_SESSION['user_id'])) {
               <div class="space-y-2">
                 <div class="flex items-center justify-between">
                   <label class="block text-sm font-semibold text-slate-600 dark:text-slate-300">Password</label>
-                  <a href="../forget_password.html" class="text-xs font-medium text-indigo-500 hover:text-indigo-400 transition-colors">Forgot password?</a>
+                  <a href="../forget_password.php" class="text-xs font-medium text-indigo-500 hover:text-indigo-400 transition-colors">Forgot password?</a>
                 </div>
                 <div class="input-wrapper relative">
                   <input required name="password" 

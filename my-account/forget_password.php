@@ -1,4 +1,8 @@
-
+<?php
+// Password reset logic placeholder
+$message = '';
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
