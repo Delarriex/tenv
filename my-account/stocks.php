@@ -50,14 +50,14 @@ $balance = number_format($user['balance'] ?? 0, 2);
                                     <img src="https://financialmodelingprep.com/image-stock/<?php echo $ticker; ?>.png" alt="<?php echo $ticker; ?>" onerror="this.src='https://ui-avatars.com/api/?name=<?php echo $ticker; ?>&background=random'">
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-white"><?php echo strtoupper($q['name']); ?></h3>
+                                    <h3 class="font-bold text-white"><?php echo strtoupper($q['name'] ?? $ticker); ?></h3>
                                     <span class="text-xs text-slate-500"><?php echo $ticker; ?> / USD</span>
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <p class="stock-price">$<?php echo number_format($q['price'], 2); ?></p>
-                                <span class="stock-change <?php echo $q['change'] >= 0 ? 'positive' : 'negative'; ?>">
-                                    <?php echo $q['change'] >= 0 ? '+' : ''; ?><?php echo $q['changePercent']; ?>%
+                                <p class="stock-price">$<?php echo number_format($q['price'] ?? 0, 2); ?></p>
+                                <span class="stock-change <?php echo ($q['change'] ?? 0) >= 0 ? 'positive' : 'negative'; ?>">
+                                    <?php echo ($q['change'] ?? 0) >= 0 ? '+' : ''; ?><?php echo $q['changePercent'] ?? '0.00'; ?>%
                                 </span>
                             </div>
                             <div class="flex gap-2">

@@ -15,7 +15,7 @@ $symbols = ['AAPL.US', 'AMD.US', 'BABA.US', 'BMW.DE', 'CSCO.US', 'EBAY.US', 'GOO
 $symbolString = implode('+', $symbols);
 
 // Stooq CSV URL (stable for public data)
-$url = "https://stooq.com/q/l/?s=" . $symbolString . "&f=sd2t2ohlc&h&e=csv";
+$url = "https://stooq.com/q/l/?s=" . $symbolString . "&f=snohlc&h&e=csv";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -23,7 +23,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
+curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
 $csv = curl_exec($ch);
 curl_close($ch);
 
@@ -42,14 +42,18 @@ if (count($lines) > 1) {
         if (count($row) < 6) continue;
         
         $symbol = strtolower($row[0]); // e.g. aapl.us
-        $price = (float)$row[5]; // Last Price
-        $open = (float)$row[4];  // Open
+        $name = trim($row[1], '" ');
+        $open = (float)$row[2];
+        $price = (float)$row[5]; // Close is LastPrice
+        
         $change = $price - $open;
         $changePercent = $open != 0 ? ($change / $open) * 100 : 0;
 
         $response['quotes'][] = [
             'symbol' => $symbol,
+            'name' => $name,
             'price' => $price,
+            'change' => round($change, 4),
             'changePercent' => round($changePercent, 2)
         ];
     }

@@ -1,57 +1,77 @@
 {
     "success": true,
     "source": "stooq-csv-live",
-    "updated": "2026-03-24T16:38:01+01:00",
+    "updated": "2026-03-24T17:39:18+01:00",
     "quotes": [
         {
             "symbol": "aapl.us",
-            "price": 249.55,
-            "changePercent": -1.82
+            "name": "APPLE INC",
+            "price": 254.63,
+            "change": 4.28,
+            "changePercent": 1.71
         },
         {
             "symbol": "amd.us",
-            "price": 200.16,
-            "changePercent": -2.32
+            "name": "ADVANCED MICRO DEVICES INC",
+            "price": 203.425,
+            "change": 2.035,
+            "changePercent": 1.01
         },
         {
             "symbol": "baba.us",
-            "price": 123.92,
-            "changePercent": -1.08
+            "name": "ALIBABA GROUP HOLDING LTD",
+            "price": 125.11,
+            "change": 0.75,
+            "changePercent": 0.6
         },
         {
             "symbol": "bmw.de",
-            "price": 73.38,
-            "changePercent": -6.95
+            "name": "BAYERISCHE MOTOREN WERKE",
+            "price": 77.84,
+            "change": 4.08,
+            "changePercent": 5.53
         },
         {
             "symbol": "csco.us",
-            "price": 78.19,
-            "changePercent": -2.45
+            "name": "CISCO SYSTEMS INC",
+            "price": 80.79,
+            "change": 2.42,
+            "changePercent": 3.09
         },
         {
             "symbol": "ebay.us",
-            "price": 88.02,
-            "changePercent": -2.72
+            "name": "EBAY INC",
+            "price": 89.18,
+            "change": -0.64,
+            "changePercent": -0.71
         },
         {
             "symbol": "googl.us",
-            "price": 295.0525,
-            "changePercent": -1.62
+            "name": "ALPHABET INC",
+            "price": 293.925,
+            "change": -5.275,
+            "changePercent": -1.76
         },
         {
             "symbol": "ko.us",
-            "price": 74.7,
-            "changePercent": -1.3
+            "name": "COCA-COLA CO",
+            "price": 75.52,
+            "change": 0.66,
+            "changePercent": 0.88
         },
         {
             "symbol": "nvda.us",
-            "price": 173.98,
-            "changePercent": -1.2
+            "name": "NVIDIA CORP",
+            "price": 175.55,
+            "change": 0.72,
+            "changePercent": 0.41
         },
         {
             "symbol": "tsla.us",
-            "price": 376.312,
-            "changePercent": -2.88
+            "name": "TESLA INC",
+            "price": 383.9373,
+            "change": 7.2423,
+            "changePercent": 1.92
         }
     ]
 }

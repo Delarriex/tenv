@@ -69,8 +69,8 @@ $holding = $stmt->fetch() ?: ['shares' => 0, 'avg_price' => 0];
                 <div class="flex items-center gap-4">
                     <img src="https://financialmodelingprep.com/image-stock/<?php echo $ticker; ?>.png" width="60" alt="">
                     <div>
-                        <h1 class="text-3xl font-bold"><?php echo $quote['name']; ?> (<?php echo $ticker; ?>)</h1>
-                        <p class="text-slate-400">Current Market Price: <span class="text-white font-bold">$<?php echo number_format($quote['price'], 2); ?></span></p>
+                        <h1 class="text-3xl font-bold"><?php echo $quote['name'] ?? $ticker; ?> (<?php echo $ticker; ?>)</h1>
+                        <p class="text-slate-400">Current Market Price: <span class="text-white font-bold">$<?php echo number_format($quote['price'] ?? 0, 2); ?></span></p>
                     </div>
                 </div>
                 <div class="text-right">
