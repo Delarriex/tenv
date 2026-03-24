@@ -48,7 +48,7 @@
         .uc-logo img,
         .auth-logo img,
         .header-logo img {
-            height: 160px !important;
+            height: 80px !important;
             width: auto !important;
             object-fit: contain;
             display: block;
@@ -89,9 +89,9 @@
         <header class="uc-header header-five uc-navbar-sticky-wrap z-999 uc-sticky">
             <nav class="uc-navbar-container uc-navbar-float ft-tertiary z-1 uc-navbar-sticky"
                 data-anime="translateY: [-40, 0]; opacity: [0, 1]; easing: easeOutExpo; duration: 750; delay: 0;">
-                <div class="uc-navbar-main" style="--uc-nav-height:80px">
+                <div class="uc-navbar-main" style="--uc-nav-height:60px">
                     <div class="container container-expand max-w-1440px">
-                        <div class="uc-navbar min-h-64px lg:min-h-80px text-gray-900 dark:text-white"
+                        <div class="uc-navbar min-h-50px lg:min-h-60px text-gray-900 dark:text-white"
                             data-uc-navbar="mode: click; animation: uc-animation-slide-top-small; duration: 150;">
                             <div class="uc-navbar-left">
                                 <div class="uc-logo text-dark dark:text-white">
@@ -401,13 +401,13 @@
                                             style="width:44px; height:44px; border-radius:10px; overflow:hidden; background:#1c1c1e; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
                                             <img src="vesttemp222/assets/images/stocks/google.png" alt="Google"
                                                 style="width:100%; height:100%; object-fit:cover;"
-                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'color:#fff;font-weight:800;font-size:13px;\\'>GOOG</span>'">
+                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'color:#fff;font-weight:800;font-size:13px;\'>GOOG</span>'">
                                         </div>
                                         <span style="flex:1; color:#fff; font-weight:600; font-size:15px;">Google</span>
-                                        <span data-stock-role="price" data-stock-symbol="goog.us"
+                                        <span data-stock-role="price" data-stock-symbol="googl.us"
                                             data-stock-currency="$"
                                             style="color:#fff; font-weight:700; font-size:15px; min-width:80px; text-align:right;">$0.00</span>
-                                        <span data-stock-role="change" data-stock-symbol="goog.us"
+                                        <span data-stock-role="change" data-stock-symbol="googl.us"
                                             style="color:rgb(255,87,101); font-weight:700; font-size:14px; min-width:65px; text-align:right; border:1px solid rgb(255,87,101); border-radius:6px; padding:2px 8px;">-0.00%</span>
                                     </div>
                                     <!-- Coca‑Cola -->
@@ -418,7 +418,7 @@
                                             style="width:44px; height:44px; border-radius:10px; overflow:hidden; background:#e41d23; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
                                             <img src="vesttemp222/assets/images/stocks/cocacola.png" alt="Coca‑Cola"
                                                 style="width:100%; height:100%; object-fit:cover;"
-                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'color:#fff;font-weight:800;font-size:13px;\\'>KO</span>'">
+                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'color:#fff;font-weight:800;font-size:13px;\'>KO</span>'">
                                         </div>
                                         <span
                                             style="flex:1; color:#fff; font-weight:600; font-size:15px;">Coca‑Cola</span>
@@ -435,7 +435,7 @@
                                             style="width:44px; height:44px; border-radius:10px; overflow:hidden; background:#76b900; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
                                             <img src="vesttemp222/assets/images/stocks/nvidia.png" alt="Nvidia"
                                                 style="width:100%; height:100%; object-fit:cover;"
-                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'color:#fff;font-weight:800;font-size:13px;\\'>NVDA</span>'">
+                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'color:#fff;font-weight:800;font-size:13px;\'>NVDA</span>'">
                                         </div>
                                         <span style="flex:1; color:#fff; font-weight:600; font-size:15px;">Nvidia</span>
                                         <span data-stock-role="price" data-stock-symbol="nvda.us"
@@ -452,7 +452,7 @@
                                             style="width:44px; height:44px; border-radius:10px; overflow:hidden; background:#e82127; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
                                             <img src="vesttemp222/assets/images/stocks/tesla.png" alt="Tesla"
                                                 style="width:100%; height:100%; object-fit:cover;"
-                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'color:#fff;font-weight:800;font-size:13px;\\'>TSLA</span>'">
+                                                onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'color:#fff;font-weight:800;font-size:13px;\'>TSLA</span>'">
                                         </div>
                                         <span style="flex:1; color:#fff; font-weight:600; font-size:15px;">Tesla</span>
                                         <span data-stock-role="price" data-stock-symbol="tsla.us"
@@ -491,8 +491,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const priceNodes = document.querySelectorAll('[data-stock-role="price"]');
-                if (!priceNodes.length) return;
-                fetch('api/stock-quotes.json')
+                if (!priceNodes.length) return;                fetch('api/stock-quotes.php')
                     .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
                     .then(function (payload) {
                         if (!payload || !payload.quotes) return;
@@ -509,7 +508,7 @@
                                 node.style.borderColor = positive ? 'rgb(106,255,65)' : 'rgb(255,87,101)';
                             });
                         });
-                    }).catch(function () { });
+                    }).catch(function (e) { console.error('Market data error:', e); });
             });
         </script>
 
@@ -571,7 +570,7 @@
                                     href="https://www.tradingview.com/markets/cryptocurrencies/prices-all/"
                                     rel="noopener nofollow" target="_blank"><span class="blue-text">Crypto
                                         markets</span></a><span class="trademark"> by TradingView</span></div>
-                            <script type="text/javascript"
+                            <script type="application/json"
                                 src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
                                     {
                                         "defaultColumn": "overview",
@@ -598,7 +597,7 @@
                             <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/"
                                     rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on
                                         TradingView</span></a></div>
-                            <script type="text/javascript"
+                            <script type="application/json"
                                 src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
                                 async>
                                     {
@@ -2566,6 +2565,23 @@
             }
         }
 
+        /* Mobile Navigation Spacing - prevent overlap         @media (max-width: 768px) {
+            .uc-logo img,
+            .auth-logo img,
+            .header-logo img {
+                height: 60px !important;
+            }
+        }
+
+        /* Mobile Sidebar Frosted Glass Refinement */
+        #uc-menu-panel .uc-offcanvas-bar {
+            background: rgba(0, 0, 0, 0.7) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            width: 320px;
+        }
+
         /* Mobile Navigation Spacing - prevent overlap with bottom nav */
         @media (max-width: 768px) {
             :root {
@@ -3007,7 +3023,7 @@
     </script>
     <!-- Mobile Nav Sidebar -->
     <div id="uc-menu-panel" data-uc-offcanvas="overlay: true; flip: false;">
-        <div class="uc-offcanvas-bar bg-black text-white p-0" style="background: #000; width: 320px;">
+        <div class="uc-offcanvas-bar text-white p-0">
             <button class="uc-offcanvas-close text-white" type="button" data-uc-close style="top: 24px; right: 24px; z-index: 10; font-size: 24px;">×</button>
             
             <div class="vstack h-full">

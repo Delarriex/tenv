@@ -42,20 +42,34 @@
 
 <style>
 /* Branding Excellence */
-.uc-logo img, .auth-logo img, .header-logo img {
-    height: 160px !important;
-    width: auto !important;
-    object-fit: contain;
-    display: block;
-    image-rendering: -webkit-optimize-contrast;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-@media (max-width: 768px) {
-    .uc-logo img, .auth-logo img, .header-logo img {
-        height: 50px !important;
-    }
-}
-</style>
+        .uc-logo img,
+        .auth-logo img,
+        .header-logo img {
+            height: 80px !important;
+            width: auto !important;
+            object-fit: contain;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .uc-logo img,
+            .auth-logo img,
+            .header-logo img {
+                height: 60px !important;
+            }
+        }
+
+        /* Mobile Sidebar Frosted Glass Refinement */
+        #uc-menu-panel .uc-offcanvas-bar {
+            background: rgba(0, 0, 0, 0.7) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            width: 320px;
+        }
+    </style>
 </head>
 <body class="uni-body panel bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 overflow-x-hidden disable-cursor">
   <div id="app" style="background:#000">
@@ -63,9 +77,9 @@
     data-uc-sticky="start: 100vh; show-on-up: true; animation: uc-animation-slide-top; sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">
     <nav class="uc-navbar-container uc-navbar-float ft-tertiary z-1 uc-navbar-transparent"
       data-anime="translateY: [-40, 0]; opacity: [0, 1]; easing: easeOutExpo; duration: 750; delay: 0;">
-      <div class="uc-navbar-main" style="--uc-nav-height:80px">
+      <div class="uc-navbar-main" style="--uc-nav-height:60px">
         <div class="container container-expand max-w-1440px">
-          <div class="uc-navbar min-h-64px lg:min-h-80px text-gray-900 dark:text-white"
+          <div class="uc-navbar min-h-50px lg:min-h-60px text-gray-900 dark:text-white"
             data-uc-navbar="mode: click; animation: uc-animation-slide-top-small; duration: 150;">
             <div class="uc-navbar-left">
               <div class="uc-logo text-dark dark:text-white">
@@ -761,14 +775,14 @@ document.addEventListener('DOMContentLoaded', function() {
   <script defer src="../vesttemp222/assets/js/aos.js"></script>
   <!-- Mobile Nav Sidebar -->
   <div id="uc-menu-panel" data-uc-offcanvas="overlay: true; flip: false;">
-      <div class="uc-offcanvas-bar bg-black text-white p-0" style="background: #000; width: 320px;">
+      <div class="uc-offcanvas-bar text-white p-0">
           <button class="uc-offcanvas-close text-white" type="button" data-uc-close style="top: 24px; right: 24px; z-index: 10; font-size: 24px;">×</button>
           
           <div class="vstack h-full">
               <!-- Logo Section -->
               <div class="px-3 py-4">
                   <a href="../index.html">
-                      <img src="../assets/images/logo.png" alt="Logo" style="height: 120px; width: auto; object-fit: contain;">
+                      <img src="../assets/images/logo.png" alt="Logo" style="height: 60px; width: auto; object-fit: contain;">
                   </a>
               </div>
 

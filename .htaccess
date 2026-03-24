@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteRule ^api/stock-quotes\.json$ api/stock-quotes.php [L]
+
+# Force trailing slash for consistency
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ $1/ [L,R=301]
+
+# Redirect /register to /register/index.php
+RewriteRule ^my-account/register/?$ my-account/register/index.php [L]
+RewriteRule ^my-account/login/?$ my-account/login/index.php [L]
+
+# Redirect .html to .php if needed or handle 404s for moved pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} ^(.+)\.html$
+RewriteCond %{DOCUMENT_ROOT}/%1.php -f
+RewriteRule ^(.+)\.html$ $1.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]

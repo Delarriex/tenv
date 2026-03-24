@@ -80195,7 +80195,7 @@
               p[n] = e;
             }
           }
-          const m = new RegExp(Object.keys(p).join("|") + "|[Ì€-Í¯Â·Ê¾Ê¼]", "gu"),
+          const m = new RegExp(Object.keys(p).join("|"), "gu"),
             v = (e, t = "NFKD") => e.normalize(t),
             b = (e) => c(e).reduce((e, t) => e + y(t), ""),
             y = (e) => (
