@@ -1,0 +1,57 @@
+{
+    "success": true,
+    "source": "stooq-csv-live",
+    "updated": "2026-03-24T16:04:00+01:00",
+    "quotes": [
+        {
+            "symbol": "aapl.us",
+            "price": 249.55,
+            "changePercent": -1.41
+        },
+        {
+            "symbol": "amd.us",
+            "price": 200.16,
+            "changePercent": -2.32
+        },
+        {
+            "symbol": "baba.us",
+            "price": 123.92,
+            "changePercent": -1.08
+        },
+        {
+            "symbol": "bmw.de",
+            "price": 73.38,
+            "changePercent": -6.95
+        },
+        {
+            "symbol": "csco.us",
+            "price": 78.19,
+            "changePercent": -2.07
+        },
+        {
+            "symbol": "ebay.us",
+            "price": 88.02,
+            "changePercent": -2.72
+        },
+        {
+            "symbol": "googl.us",
+            "price": 295.0525,
+            "changePercent": -1.62
+        },
+        {
+            "symbol": "ko.us",
+            "price": 74.7,
+            "changePercent": -1.3
+        },
+        {
+            "symbol": "nvda.us",
+            "price": 173.98,
+            "changePercent": -1.09
+        },
+        {
+            "symbol": "tsla.us",
+            "price": 376.312,
+            "changePercent": -2.6
+        }
+    ]
+}
