@@ -3,7 +3,7 @@ session_start();
 require_once(__DIR__ . '/../config/db.php');
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../login/index.php');
+    header('Location: login.php');
     exit();
 }
 
@@ -12,6 +12,7 @@ $stmt->execute([$_SESSION['user_id']]);
 $userRole = $stmt->fetchColumn();
 
 if ($userRole !== 'admin') {
-    die("Access Denied: You do not have administrator privileges.");
+    header('Location: login.php?error=access_denied');
+    exit();
 }
 ?>

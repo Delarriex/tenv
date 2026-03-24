@@ -12,11 +12,15 @@ $stmt = $pdo->prepare("SELECT t.*, u.username, u.email FROM transactions t JOIN 
 $stmt->execute();
 $pendingWithdrawals = $stmt->fetchAll();
 
-// Fetch pending KYC
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM kyc WHERE status = 'pending'");
-$stmt->execute();
-$pendingKycCount = $stmt->fetchColumn();
+// Fetch Stats
+$stats = [
+    'total_users' => $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'user'")->fetchColumn(),
+    'tvl' => $pdo->query("SELECT SUM(balance + profit) FROM users")->fetchColumn(),
+    'total_payouts' => $pdo->query("SELECT SUM(amount) FROM transactions WHERE type = 'withdrawal' AND status = 'completed'")->fetchColumn(),
+    'active_investments' => $pdo->query("SELECT COUNT(*) FROM investments WHERE status = 'active'")->fetchColumn()
+];
 
+$pendingKycCount = $pdo->query("SELECT COUNT(*) FROM kyc WHERE status = 'pending'")->fetchColumn();
 $totalPending = count($pendingDeposits) + count($pendingWithdrawals);
 ?>
 <!DOCTYPE html>
@@ -32,20 +36,59 @@ $totalPending = count($pendingDeposits) + count($pendingWithdrawals);
         <header class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold text-slate-700 dark:text-navy-100">Admin Dashboard</h1>
             <div class="flex gap-4">
-                <a href="transactions.php" class="btn bg-primary text-white">Manage All Transactions</a>
+                <a href="users.php" class="btn bg-primary text-white flex items-center gap-2">
+                    <i class="fa fa-users"></i> User Management
+                </a>
+                <a href="transactions.php" class="btn bg-slate-100 text-slate-700 dark:bg-navy-700 dark:text-navy-100 flex items-center gap-2">
+                    <i class="fa fa-exchange"></i> All Transactions
+                </a>
                 <a href="../my-account/dashboard.php" class="btn bg-slate-200 text-slate-700">User View</a>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="card p-6 bg-white dark:bg-navy-800 shadow-sm border border-slate-200 dark:border-navy-600">
-                <p class="text-sm text-slate-500">Transaction Requests</p>
-                <p class="text-3xl font-bold text-primary"><?= $totalPending ?></p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-center">
+            <div class="card p-6 bg-white dark:bg-navy-800 shadow-sm border border-slate-200 dark:border-navy-600 rounded-2xl">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Users</p>
+                <p class="text-2xl font-bold text-slate-700 dark:text-navy-100"><?= number_format($stats['total_users']) ?></p>
             </div>
-            <div class="card p-6 bg-white dark:bg-navy-800 shadow-sm border border-slate-200 dark:border-navy-600">
-                <p class="text-sm text-slate-500">Pending KYC</p>
-                <p class="text-3xl font-bold text-warning"><?= $pendingKycCount ?></p>
-                <a href="kyc.php" class="text-xs text-primary hover:underline mt-2 inline-block">Review Documents</a>
+            <div class="card p-6 bg-white dark:bg-navy-800 shadow-sm border border-slate-200 dark:border-navy-600 rounded-2xl">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total TVL</p>
+                <p class="text-2xl font-bold text-primary">$<?= number_format($stats['tvl'], 2) ?></p>
+            </div>
+            <div class="card p-6 bg-white dark:bg-navy-800 shadow-sm border border-slate-200 dark:border-navy-600 rounded-2xl">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Payouts</p>
+                <p class="text-2xl font-bold text-error">$<?= number_format($stats['total_payouts'] ?? 0, 2) ?></p>
+            </div>
+            <div class="card p-6 bg-white dark:bg-navy-800 shadow-sm border border-slate-200 dark:border-navy-600 rounded-2xl">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Active Trades</p>
+                <p class="text-2xl font-bold text-success"><?= number_format($stats['active_investments']) ?></p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="card p-6 bg-primary text-white shadow-lg rounded-2xl flex justify-between items-center transition-transform hover:scale-[1.02]">
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider opacity-80">Funding</h3>
+                    <p class="text-2xl font-black mt-1"><?= count($pendingDeposits) ?></p>
+                    <p class="text-[10px] opacity-70 mt-1">Pending Deposits</p>
+                </div>
+                <i class="fa fa-arrow-down text-3xl opacity-30"></i>
+            </div>
+            <div class="card p-6 bg-warning text-white shadow-lg rounded-2xl flex justify-between items-center transition-transform hover:scale-[1.02]">
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider opacity-80">Payouts</h3>
+                    <p class="text-2xl font-black mt-1"><?= count($pendingWithdrawals) ?></p>
+                    <p class="text-[10px] opacity-70 mt-1">Pending Withdrawals</p>
+                </div>
+                <i class="fa fa-arrow-up text-3xl opacity-30"></i>
+            </div>
+            <div class="card p-6 bg-slate-700 text-white shadow-lg rounded-2xl flex justify-between items-center transition-transform hover:scale-[1.02]">
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider opacity-80">KYC</h3>
+                    <p class="text-2xl font-black mt-1"><?= $pendingKycCount ?></p>
+                    <a href="kyc.php" class="text-[10px] text-primary-focus hover:underline mt-1 inline-block">Review Documents &rarr;</a>
+                </div>
+                <i class="fa fa-id-card text-3xl opacity-30"></i>
             </div>
         </div>
 
