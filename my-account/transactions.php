@@ -1,11 +1,5 @@
 <?php
 require_once 'auth_guard.php';
-require_once '../config/db.php';
-
-// Fetch user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
 
 $username = $user['username'] ?? 'User';
 $balance = number_format($user['balance'] ?? 0, 2);

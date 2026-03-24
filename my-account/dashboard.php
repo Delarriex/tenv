@@ -2,17 +2,6 @@
 require_once('../includes/auth_guard.php');
 require_once('../config/db.php');
 
-// Fetch user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
-
-if (!$user) {
-    session_destroy();
-    header('Location: login/index.php');
-    exit();
-}
-
 // Fetch total investment amount
 $stmt = $pdo->prepare("SELECT SUM(amount) as total FROM investments WHERE user_id = ? AND status = 'active'");
 $stmt->execute([$_SESSION['user_id']]);

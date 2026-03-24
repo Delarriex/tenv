@@ -1,11 +1,9 @@
 <?php
 require_once 'auth_guard.php';
-require_once '../config/db.php';
-require_once '../includes/FinanceManager.php';
 
-$finance = new FinanceManager($pdo);
 $portfolio = $finance->getPortfolio($_SESSION['user_id']);
-
+$message = '';
+$error = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +25,7 @@ $portfolio = $finance->getPortfolio($_SESSION['user_id']);
     <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900">
         <?php include 'partials/sidebar.php'; ?>
         <?php include 'partials/header.php'; ?>
-    <div class="main-content px-[var(--margin-x)] py-8">
+        <main class="main-content w-full px-[var(--margin-x)] py-8">
         <div class="portfolio-header">
             <h1 class="text-3xl font-bold mb-2">My Investment Portfolio</h1>
             <p class="text-slate-400">Real-time status of your assets and overall performance.</p>
@@ -103,4 +101,5 @@ $portfolio = $finance->getPortfolio($_SESSION['user_id']);
         </main>
     </div>
     <script>window.addEventListener("DOMContentLoaded", () => Alpine.start());</script>
+</body>
 </html>

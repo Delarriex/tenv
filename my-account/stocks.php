@@ -1,16 +1,9 @@
 <?php
 require_once 'auth_guard.php';
-require_once '../config/db.php';
-require_once '../includes/FinanceManager.php';
 
-$finance = new FinanceManager($pdo);
+$message = '';
+$error = '';
 $quotes = $finance->getLiveQuotes();
-
-// Fetch user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
-
 $balance = number_format($user['balance'] ?? 0, 2);
 ?>
 <!DOCTYPE html>

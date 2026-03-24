@@ -11,10 +11,21 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Process profits periodically (simple simulation)
+// Process profits periodically
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/FinanceManager.php';
+
+// Fetch user data globally for all account pages
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch();
+
+if (!$user) {
+    session_destroy();
+    header('Location: login/index.php');
+    exit();
+}
+
 $finance = new FinanceManager($pdo);
-// In a real app, you'd only run this once every hour/day
 $finance->processProfits();
 ?>

@@ -1,11 +1,5 @@
 <?php
 require_once 'auth_guard.php';
-require_once '../config/db.php';
-
-// Get user data for the sidebar
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
 
 $pageTitle = "Airdrop Center - Tenvault";
 ?>

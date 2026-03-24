@@ -47,16 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['amount'])) {
     }
 }
 
-// Fetch user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
-
-if (!$user) {
-    session_destroy();
-    header('Location: login/index.php');
-    exit();
-}
+// User data is fetched globally in auth_guard.php
 ?>
 <!DOCTYPE html>
 <html lang="en">

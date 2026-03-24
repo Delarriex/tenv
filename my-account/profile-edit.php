@@ -1,11 +1,5 @@
 <?php
 require_once 'auth_guard.php';
-require_once '../config/db.php';
-
-// Fetch user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
 
 $username = $user['username'] ?? 'User';
 $email = $user['email'] ?? '';
@@ -29,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
         $updateStmt->execute([$newFullName, $newPhone, $newAddress, $_SESSION['user_id']]);
         $message = "Profile updated successfully!";
         
-        // Refresh user data
+        // Refresh user data (redundant fetch but good for consistency after update)
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$_SESSION['user_id']]);
         $user = $stmt->fetch();
         $fullName = $user['full_name'];

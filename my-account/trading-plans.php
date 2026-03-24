@@ -1,9 +1,6 @@
 <?php
 require_once('../includes/auth_guard.php');
-require_once('../config/db.php');
-require_once('../includes/FinanceManager.php');
 
-$finance = new FinanceManager($pdo);
 $message = '';
 $error = '';
 
@@ -12,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_investment']))
     $planName = $_POST['plan_name'] ?? 'Custom Plan';
     $amount = filter_var($_POST['amount'], FILTER_VALIDATE_FLOAT);
 
-    // Map plan details (This could be a DB lookup, but for now we follow the UI)
+    // Map plan details
     $planMap = [
         'STARTER PLAN' => ['roi' => 10, 'duration' => 12],
         'PLATINUM PLAN' => ['roi' => 30, 'duration' => 24],
@@ -29,17 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_investment']))
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
-}
-
-// Fetch user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
-
-if (!$user) {
-    session_destroy();
-    header('Location: login/index.php');
-    exit();
 }
 ?>
 <!DOCTYPE html>

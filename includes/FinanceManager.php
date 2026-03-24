@@ -20,6 +20,44 @@ class FinanceManager {
     }
 
     /**
+     * Trading Plans: Create a new investment
+     */
+    public function invest($userId, $planName, $amount, $roi, $durationHours) {
+        try {
+            $this->pdo->beginTransaction();
+
+            // Check balance
+            $stmt = $this->pdo->prepare("SELECT balance FROM users WHERE id = ?");
+            $stmt->execute([$userId]);
+            $balance = $stmt->fetchColumn();
+
+            if ($balance < $amount) {
+                throw new Exception("Insufficient balance to invest $$amount in $planName.");
+            }
+
+            // Deduct balance
+            $stmt = $this->pdo->prepare("UPDATE users SET balance = balance - ? WHERE id = ?");
+            $stmt->execute([$amount, $userId]);
+
+            // Create investment record
+            $startDate = date('Y-m-d H:i:s');
+            $endDate = date('Y-m-d H:i:s', strtotime("+$durationHours hours"));
+            
+            $stmt = $this->pdo->prepare("INSERT INTO investments (user_id, plan_name, amount, roi_percentage, duration_hours, status, last_profit_at, start_date, end_date) VALUES (?, ?, ?, ?, ?, 'active', ?, ?, ?)");
+            $stmt->execute([$userId, $planName, $amount, $roi, $durationHours, $startDate, $startDate, $endDate]);
+
+            // Log transaction
+            $this->createTransaction($userId, 'investment', $amount, 'completed', 'Trading Plan', $planName);
+
+            $this->pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            if ($this->pdo->inTransaction()) $this->pdo->rollBack();
+            throw $e;
+        }
+    }
+
+    /**
      * Stock Trading: Buy shares
      */
     public function buyStock($userId, $symbol, $quantity, $price) {

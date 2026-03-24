@@ -1,9 +1,6 @@
 <?php
 require_once 'auth_guard.php';
-require_once '../config/db.php';
-require_once '../includes/FinanceManager.php';
 
-$finance = new FinanceManager($pdo);
 $ticker = $_GET['ticker'] ?? 'AAPL';
 $ticker = strtoupper(preg_replace('/[^A-Za-z]/', '', $ticker));
 
@@ -36,10 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['trade'])) {
     }
 }
 
-// Get user data
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
+// User data is already globally available via auth_guard.php
 
 // Get portfolio info for this stock
 $stmt = $pdo->prepare("SELECT shares, avg_price FROM portfolio WHERE user_id = ? AND symbol = ?");
